@@ -1,15 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq6ppis21im0v"]
+[gd_scene load_steps=4 format=3 uid="uid://bq6ppis21im0v"]
 
-[ext_resource type="Script" path="res://scenes/controller.gd" id="1_62f5y"]
+[ext_resource type="Script" path="res://scripts/GameController.gd" id="1_h5wwv"]
 [ext_resource type="PackedScene" uid="uid://8dmot7mmq8ov" path="res://scenes/decks/deck.tscn" id="1_of4l0"]
+[ext_resource type="Script" path="res://scripts/GameState.gd" id="3_0j4lw"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Controller" type="Node" parent="."]
-script = ExtResource("1_62f5y")
+[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("GameState", "deck")]
+script = ExtResource("1_h5wwv")
+GameState = NodePath("GameState")
+deck = NodePath("Deck")
+
+[node name="Camera2D" type="Camera2D" parent="Controller"]
+position = Vector2(328, 176)
+scale = Vector2(1, 7.84)
 
 [node name="Deck" parent="Controller" instance=ExtResource("1_of4l0")]
 
-[node name="Camera2D" type="Camera2D" parent="Controller"]
-position = Vector2(325, 178)
-scale = Vector2(1, 7.84)
+[node name="GameState" type="Node" parent="Controller"]
+script = ExtResource("3_0j4lw")
+
+[node name="DeckPosition" type="Marker2D" parent="Controller"]
+position = Vector2(568, 176)

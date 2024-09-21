@@ -3,25 +3,14 @@ extends Node2D
 @export var card_sprites: Dictionary # A dictionary to store sprites for each card
 var deck: Array = [] # This will hold the cards
 
-# Initialize the deck with all 52 cards
-# func _ready():
-# 	create_deck()
-# 	shuffle_deck()
-
-
-# Create all the cards dynamically
 func create_deck():
 	var suits = ["spades", "hearts", "diamonds", "clubs"]
 	var values = range(1, 14)
 	var stub = "res://assets/Playing Cards/"
-	var x_position = 36
-	var y_position = 50
-	var card_spacing = 100
 
 	for suit in suits:
 		for value in values:
 			var card_scene = preload("res://scenes/cards/card.tscn").instantiate()
-			card_scene.position = Vector2(x_position, y_position)
 			card_scene.visible = true
 			add_child(card_scene)
 			var card_sprite_key = "card-" + suit + "-" + "%s" % value + ".png"
@@ -48,12 +37,10 @@ func deal_cards(player_hands: Array, cards_per_player: int):
 				var card = deck.pop_front() # Remove the top card from the deck
 				player.add_card_to_hand(card) # Add the card to the player's hand (assuming the player has a method for this)
 
-func stack_deck():
-	var x_position = 500
-	var y_position = 50
+func stack_deck(deck_position: Vector2):
+	var x_position = deck_position.x
 	var card_spacing = 0.3
-	print('stacking the deck')
 
 	for card in deck:
-		card.position = Vector2(x_position, y_position)
+		card.position = Vector2(x_position, deck_position.y)
 		x_position += card_spacing
