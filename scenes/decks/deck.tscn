@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://8dmot7mmq8ov"]
+[gd_scene load_steps=3 format=3 uid="uid://8dmot7mmq8ov"]
 
 [ext_resource type="Script" path="res://scenes/decks/deck.gd" id="1_xbm37"]
 
-[node name="Deck" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orx40"]
+size = Vector2(48, 71)
+
+[node name="Deck" type="Area2D"]
 script = ExtResource("1_xbm37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_orx40")

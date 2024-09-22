@@ -4,11 +4,15 @@ extends Area2D
 @export var card_back: CompressedTexture2D 
 @export var card_front: CompressedTexture2D
 
+signal card_dragged(card: Node2D)
+signal card_dropped()
+
 var initial_z_index: int = 0  # The initial z-index of the card
 var card_sprite_node: Sprite2D
 var is_face_up: bool = false
 var dragging: bool = false 
-var drag_offset: Vector2 = Vector2.ZERO  
+var drag_offset: Vector2 = Vector2.ZERO
+var is_top: bool = false
 
 func _ready() -> void:
 	initial_z_index = z_index
@@ -17,23 +21,19 @@ func _ready() -> void:
 	card_back = load("res://assets/Playing Cards/card-back2.png")
 	set_process_input(true)
 
-func _process(delta: float) -> void:
-	pass
+# func _input_event(viewport, event, shape_idx) -> void:
+# 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+# 		if event.pressed and is_top:
+# 			print(is_top)
+# 			dragging = true
+# 			emit_signal("card_dragged", self)
+# 		else:
+# 			emit_signal("card_dropped")
+# 			dragging = false
 
-func _input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			dragging = true
-			handle_dragging()
-		else:
-			dragging = false
-			z_index = 52
 
-	if dragging:
-		var new_position = event.position + drag_offset
-		position = new_position
-
-	
+func is_card() -> bool:
+	return true
 
 func set_card(suit: String, value: String, sprite: CompressedTexture2D) -> void:
 	card_suit = suit
@@ -48,10 +48,5 @@ func flip_card() -> void:
 		card_sprite_node.texture = card_back
 		is_face_up = false
 
-func handle_dragging() -> void:
-	if dragging:
-		var new_position = get_global_mouse_position() + drag_offset
-		position = new_position
-		z_index = 53
-	else:
-		z_index = 52
+func move_card_to(pos: Vector2) -> void:
+	self.position = pos
