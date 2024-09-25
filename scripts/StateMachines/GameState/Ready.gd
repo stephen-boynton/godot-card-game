@@ -6,31 +6,34 @@ class_name Ready
 var deck = null
 var table = null
 var camera = null
+var cards = []
+var player = null
+var starting_player = 0
+var change_state: Callable
 
 # setup
 func enter():
-    deck = get_tree().get_current_scene().get_node("Deck")
-    table = get_tree().get_current_scene().get_node("Table")
-    camera = get_tree().get_current_scene().get_node("Camera2D")
+	if deck and table and camera:
+		# for player in players:
+		table.position_player(player)
 
-    deck.connect("deal_requested", Callable(self, "_on_deal_requested"))
-    camera.make_current()
-    deck.create_deck()
-    deck.shuffle_deck()
-    deck.stack_deck(table.deck_position)
-
+		deck.connect("deal_requested", Callable(self, "_on_deal_requested"))
+# `		table.set_table()
+		camera.make_current()
+		# deck.create_deck(cards)
+		deck.shuffle_deck()
+		deck.stack_deck(table.deck_position)
 # breakdown
 func exit():
-    deck.disconnect("deal_requested", Callable(self, "_on_deal_requested"))
-    camera = null
-    deck = null
-    table = null
-    print("Exiting Idle State")
+	deck.disconnect("deal_requested", Callable(self, "_on_deal_requested"))
+	camera = null
+	deck = null
+	table = null
+	player = null
 
 func update(delta: float):
-    pass
+	pass
 
 func _on_deal_requested() -> void:
-    get_parent().change_state("deal")
-
-
+	print("REQUESTED")
+	change_state.call('deal')

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b508ck0lqix3v"]
+
+[ext_resource type="Script" path="res://scripts/BaseModels/Table.gd" id="1_wgnsv"]
+[ext_resource type="Texture2D" uid="uid://cr5e5oxyojl8i" path="res://assets/lake.jpg" id="2_qhqc2"]
+
+[node name="Table" type="Node2D"]
+script = ExtResource("1_wgnsv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_as_relative = false
+texture = ExtResource("2_qhqc2")

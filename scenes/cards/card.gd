@@ -1,6 +1,6 @@
 extends Area2D
 @export var card_value: String = "Ace"
-@export var card_suit: String = "Spades"
+@export var card_suit: String = "spades"
 @export var card_back: CompressedTexture2D 
 @export var card_front: CompressedTexture2D
 

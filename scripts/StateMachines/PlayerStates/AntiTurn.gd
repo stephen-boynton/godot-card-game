@@ -1,7 +1,7 @@
 # IdleState.gd
 extends BaseState
 
-class_name PlayerTurn
+class_name Player_AntiTurn
 
 var player = null
 

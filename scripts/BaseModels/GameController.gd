@@ -4,6 +4,9 @@ extends Node2D
 
 var round_history: Array = []
 
+func _ready() -> void:
+    GameState = $GameState
+
 func prepare_table() -> void:
     pass
 

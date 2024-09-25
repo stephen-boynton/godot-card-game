@@ -3,13 +3,16 @@ extends BaseState
 class_name Deal
 
 var player = null
+var deck = null
+var table = null
+var camera = null
+
 
 func enter():
-    print("Entering Player Turn State")
-    # player = get_tree().get_current_scene().get_node("Player")
+    pass
 
 func update(delta: float):
-    print("In Player Turn State")
+    pass
     # if player.is_turn_over():
     #     get_tree().set_current_state("GameState/EnemyTurn")
     #     return

@@ -2,7 +2,10 @@
 extends Node
 
 var current_state: BaseState = null
-var states = {}
+var states = {
+    "idle": null,
+    "move": null
+}
 
 func _ready():
     # Initialize all states

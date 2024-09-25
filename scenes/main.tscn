@@ -1,29 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://bq6ppis21im0v"]
+[gd_scene load_steps=9 format=3 uid="uid://bq6ppis21im0v"]
 
 [ext_resource type="Script" path="res://scripts/GameController.gd" id="1_h5wwv"]
 [ext_resource type="PackedScene" uid="uid://8dmot7mmq8ov" path="res://scenes/decks/deck.tscn" id="1_of4l0"]
 [ext_resource type="Script" path="res://scripts/StateMachines/GameState/Game_SM.gd" id="2_cqhci"]
 [ext_resource type="Script" path="res://scripts/GameState.gd" id="3_0j4lw"]
+[ext_resource type="Script" path="res://scripts/BaseModels/Deck.gd" id="4_18kjy"]
+[ext_resource type="PackedScene" uid="uid://b508ck0lqix3v" path="res://scenes/Table.tscn" id="6_a1uu4"]
+[ext_resource type="Script" path="res://scripts/BaseModels/Player.gd" id="6_kseoo"]
+[ext_resource type="Script" path="res://scripts/StateMachines/PlayerStates/Player_SM.gd" id="7_o7x2h"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("GameState", "deck")]
+[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("GameState")]
 script = ExtResource("1_h5wwv")
 GameState = NodePath("GameState")
-deck = NodePath("Deck")
 
-[node name="GameStateMachine" type="Node2D" parent="Controller"]
-script = ExtResource("2_cqhci")
+[node name="Table" parent="Controller" node_paths=PackedStringArray("deck_marker") instance=ExtResource("6_a1uu4")]
+position = Vector2(336, 176)
+deck_marker = NodePath("../DeckPosition")
 
 [node name="Camera2D" type="Camera2D" parent="Controller"]
 position = Vector2(328, 176)
 scale = Vector2(1, 7.84)
 
 [node name="Deck" parent="Controller" instance=ExtResource("1_of4l0")]
-position = Vector2(568, 176)
+script = ExtResource("4_18kjy")
+deck_name = "Deck"
+description = "This is a deck"
+id = 0
+cards = []
+size = 0
+max_size = 0
+min_size = 0
+is_shuffled = false
+is_sorted = false
+is_reversed = false
+is_in_use = false
+is_useable = false
+display_image = null
 
 [node name="GameState" type="Node" parent="Controller"]
 script = ExtResource("3_0j4lw")
 
 [node name="DeckPosition" type="Marker2D" parent="Controller"]
-position = Vector2(568, 176)
+position = Vector2(536, 168)
+
+[node name="Player1" type="Node2D" parent="Controller"]
+script = ExtResource("6_kseoo")
+
+[node name="Player1Position" type="Marker2D" parent="Controller/Player1"]
+
+[node name="PlayerStateMachine" type="Node" parent="Controller/Player1"]
+script = ExtResource("7_o7x2h")
+
+[node name="GameStateMachine" type="Node2D" parent="Controller"]
+script = ExtResource("2_cqhci")

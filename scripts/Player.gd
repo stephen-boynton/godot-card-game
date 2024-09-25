@@ -24,4 +24,3 @@ func add_card_to_hand(card: Node2D) -> void:
 	card.set_owner(self)
 	card.set_visible(true)
 	card.set_z_index(hand.size())
-	print("Added card to hand: " + card.card_suit + " " + card.card_value)
