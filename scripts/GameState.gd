@@ -16,4 +16,3 @@ extends Node
 
 func initialize() -> void:
     state["deck"] = $Controller/Deck
-    state["players"] = [preload("res://scripts/Player.gd").new(), preload("res://scripts/Player.gd").new()]

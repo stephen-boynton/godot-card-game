@@ -10,18 +10,13 @@ var table = null
 func _ready():
     deck = get_parent().get_node("Deck")
     table = get_parent().get_node("Table")
-    # Initialize all states
     states["idle"] = PLayer_Idle.new()
     states['idle'].table = table
     states['idle'].change_state = change_state
-
-    # Set the initial state
-    print('initializing')
     change_state("idle")
 
 # Method to change the current state
 func change_state(new_state_name: String):
-    print('changing state')
     if current_state != null:
         current_state.exit()
     

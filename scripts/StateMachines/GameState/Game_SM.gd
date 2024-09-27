@@ -8,14 +8,16 @@ var deck = null
 var table = null
 var camera = null
 var players = []
+var player = null
 
 func _ready():
     deck = get_parent().get_node("Deck")
     table = get_parent().get_node("Table")
     camera = get_parent().get_node("Camera2D")
+    player = get_parent().get_node("Player1")
     # Initialize all states
     states["ready"] = Ready.new()
-    states["ready"].player = get_parent().get_node("Player1")
+    states["ready"].player = player
     states['ready'].deck = deck
     states["ready"].cards = deck.create_deck()
     states['ready'].camera = camera
@@ -25,8 +27,16 @@ func _ready():
 
     states["deal"] = Deal.new()
     states["deal"].deck = deck
-    states["deal"].table = get_parent().get_node("Table")
-    states["player_tun"] = PlayerTurn.new()
+    states["deal"].table = table
+    states["deal"].player = player
+    states["deal"].change_state = change_state
+
+    states["player_turn"] = PlayerTurn.new()
+    states["player_turn"].player = player
+    states["player_turn"].deck = deck
+    states["player_turn"].table = table
+    states["player_turn"].camera = camera
+    states["player_turn"].change_state = change_state
     
 
     # Set the initial state

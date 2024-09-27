@@ -10,7 +10,7 @@ var change_state: Callable
 # setup
 func enter():
 	# table.position_player(player)
-	print("Entering Player Turn State")
+	print("Entering Idle State")
 
 
 # breakdown

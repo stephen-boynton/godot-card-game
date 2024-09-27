@@ -19,6 +19,9 @@ GameState = NodePath("GameState")
 position = Vector2(336, 176)
 deck_marker = NodePath("../DeckPosition")
 
+[node name="Player1HandPosition" type="Marker2D" parent="Controller/Table"]
+position = Vector2(-128, 112)
+
 [node name="Camera2D" type="Camera2D" parent="Controller"]
 position = Vector2(328, 176)
 scale = Vector2(1, 7.84)
@@ -38,6 +41,7 @@ is_reversed = false
 is_in_use = false
 is_useable = false
 display_image = null
+card_offset = 60
 
 [node name="GameState" type="Node" parent="Controller"]
 script = ExtResource("3_0j4lw")
@@ -47,8 +51,6 @@ position = Vector2(536, 168)
 
 [node name="Player1" type="Node2D" parent="Controller"]
 script = ExtResource("6_kseoo")
-
-[node name="Player1Position" type="Marker2D" parent="Controller/Player1"]
 
 [node name="PlayerStateMachine" type="Node" parent="Controller/Player1"]
 script = ExtResource("7_o7x2h")

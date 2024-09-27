@@ -15,7 +15,8 @@ position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_51ewm")
 
 [node name="card_sprite" type="Sprite2D" parent="."]
-position = Vector2(87, 117)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_ypdu2")
-offset = Vector2(-174, -234)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

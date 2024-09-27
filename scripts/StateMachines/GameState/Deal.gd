@@ -6,19 +6,12 @@ var player = null
 var deck = null
 var table = null
 var camera = null
+var change_state: Callable
 
 
 func enter():
-    pass
+    deck.deal_cards([player], 5, table)
+    change_state.call('player_turn')
 
 func update(delta: float):
     pass
-    # if player.is_turn_over():
-    #     get_tree().set_current_state("GameState/EnemyTurn")
-    #     return
-    # if player.is_dead():
-    #     get_tree().set_current_state("GameState/GameOver")
-    #     return
-    # if player.is_victorious():
-    #     get_tree().set_current_state("GameState/Victory")
-    #     return

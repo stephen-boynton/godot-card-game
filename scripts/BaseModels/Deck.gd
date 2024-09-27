@@ -15,6 +15,7 @@ class_name Deck
 @export var is_in_use: bool = false
 @export var is_useable: bool = false
 @export var display_image: Texture
+@export var card_offset = 300
 
 # Signals =====================================================================
 signal deal_requested()
@@ -130,13 +131,29 @@ func draw_random_cards(num: int):
     return drawn_cards
 
 
-func deal_cards(players: Array, cards_per_player: int):
+func deal_cards(players: Array, cards_per_player: int, table: Node2D):
+    var local_offset = 0
+    var tween = create_tween()
     for i in range(cards_per_player):
         if cards.size() > 0:
             for player in players:
                 var card = cards.pop_front()
+                card.make_selectable()
                 player.add_card_to_hand(card)
+                animate_deal(card, table, local_offset, tween)
+                local_offset += card_offset
     check_deck()
+
+func animate_deal(card, table, offset, tween):
+    var loc = table.player_hand_position
+    var target_position = Vector2(loc.x + offset, loc.y)
+    print("Animating card to: ", target_position)
+    tween.tween_property(card, "global_position", target_position, 0.1)
+    tween.finished.connect(card.flip_card)
+
+
+
+
 
 
 

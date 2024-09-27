@@ -7,7 +7,7 @@ var player = null
 
 # setup
 func enter():
-    print("Entering Player Turn State")
+    print("Entering Player Active State")
 
 
 # breakdown
